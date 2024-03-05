@@ -39,11 +39,11 @@ def load_assets() -> Assets:
         base_path = "/AAAAA/"
         sanitized_path = os.path.realpath(sanitized_path)
 
-        common_base = os.path.commonpath([base_path, safe_path]) 
-        if common_base != base_path:
-            raise ValueError
-        if os.path.basename(safe_path) != env_path:
-            raise ValueError
+        # common_base = os.path.commonpath([base_path, safe_path]) 
+        # if common_base != base_path:
+        #     raise ValueError
+        # if os.path.basename(safe_path) != env_path:
+        #     raise ValueError
         if os.path.abspath(env_path):
             raise ValueError
         return _load2(sanitized_path)
@@ -58,7 +58,7 @@ def load_assets() -> Assets:
     # return _load2()
 # = LOCAL_DIR / EXPERIMENT_NAME
 
-def _load2(path) -> Assets:
+def _load2(path: str) -> Assets:
     # sanitize filepath
     # if not path.is_absolute():
     #     sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
