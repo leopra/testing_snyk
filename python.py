@@ -28,10 +28,28 @@ class Assets(TypedDict):
     metadata: dict[str, Any]
 
 
+@cache
+def load_assets() -> Assets:
+    """Load the experiment assets corresponding to the defined constants."""
+    # in odc, the model is downloaded by platform to this env var location
+    env_path = os.environ.get("EXPERIMENT_FOLDER")
+
+    if env_path is not None:
+        return _load2(Path(env_path))
+
+    try:
+        return _load2()
+    except FileNotFoundError:
+        pass
+    # If the files don't exist locally, download and unpack them.
+    return _load2()
+
+
 def _load2(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
     # sanitize filepath
     if not path.is_absolute():
         sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
+        base_path = "/AAAAA/"
         if not os.path.isfile(sanitized_path):
             raise ValueError
         sanitized_path = os.path.realpath(sanitized_path)
@@ -41,6 +59,7 @@ def _load2(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
 
         return Assets(
             name=path.stem,
+            metadata=metadata,
             metadata=json_metadata,
         )
     else:
