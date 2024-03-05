@@ -58,7 +58,7 @@ def load_assets() -> Assets:
     # return _load2()
 # = LOCAL_DIR / EXPERIMENT_NAME
 
-def _load2(path: Path) -> Assets:
+def _load2(path) -> Assets:
     # sanitize filepath
     # if not path.is_absolute():
     #     sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
