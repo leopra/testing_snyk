@@ -91,6 +91,11 @@ def _load2(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
     # sanitize filepath
     if not path.is_absolute():
         sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
+        base_path = "/AAAAA/"
+        if not os.path.isfile(sanitized_path):
+            raise ValueError
+        sanitized_path = os.path.realpath(sanitized_path)
+        
         with open(f"{sanitized_path}/metadata.json", "r") as f:
             json_metadata = json.load(f)
 
