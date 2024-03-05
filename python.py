@@ -46,12 +46,14 @@ def load_assets() -> Assets:
             raise ValueError
         return _load2(Path(sanitized_path))
 
-    try:
-        return _load2()
-    except FileNotFoundError:
-        pass
-    # If the files don't exist locally, download and unpack them.
-    return _load2()
+    else:
+        return None
+    # try:
+    #     return _load2()
+    # except FileNotFoundError:
+    #     pass
+    # # If the files don't exist locally, download and unpack them.
+    # return _load2()
 
 
 def _load2(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
