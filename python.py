@@ -53,7 +53,7 @@ def _load(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
     # base_path = "/AAAAA/"
     # if not os.path.isfile(metadata_path):
     #    raise ValueError
-    #safe_path = os.path.realpath(metadata_path)
+    safe_path = os.path.realpath(metadata_path)
 
     # common_base = os.path.commonpath([base_path, safe_path]) 
     # if common_base != base_path:
@@ -64,7 +64,7 @@ def _load(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
     #     raise ValueError
 
     #metadata_path = os.path.join(path,"metadata.json")
-    safe_path = metadata_path
+    #safe_path = metadata_path
     with open(safe_path, "r") as f:
         metadatad=json.load(f)
     return Assets(
