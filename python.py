@@ -44,7 +44,9 @@ def load_assets() -> Assets:
             raise ValueError
         if os.path.basename(safe_path) != env_path:
             raise ValueError
-        return _load2(Path(sanitized_path))
+        if os.path.abspath(env_path):
+            raise ValueError
+        return _load2(sanitized_path)
 
     else:
         return None
@@ -58,18 +60,18 @@ def load_assets() -> Assets:
 
 def _load2(path: Path) -> Assets:
     # sanitize filepath
-    if not path.is_absolute():
-        sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
-        base_path = "/AAAAA/"
-        if not os.path.isfile(sanitized_path):
-            raise ValueError
-        sanitized_path = os.path.realpath(sanitized_path)
+    # if not path.is_absolute():
+    #     sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
+    #     base_path = "/AAAAA/"
+    #     if not os.path.isfile(sanitized_path):
+    #         raise ValueError
+    #     sanitized_path = os.path.realpath(sanitized_path)
 
-        common_base = os.path.commonpath([base_path, safe_path]) 
-        if common_base != base_path:
-            raise ValueError
-        if os.path.basename(safe_path) != path.as_posix():
-            raise ValueError
+    #     common_base = os.path.commonpath([base_path, safe_path]) 
+    #     if common_base != base_path:
+    #         raise ValueError
+    #     if os.path.basename(safe_path) != path.as_posix():
+    #         raise ValueError
 
         with open(f"{sanitized_path}/metadata.json", "r") as f:
             json_metadata = json.load(f)
