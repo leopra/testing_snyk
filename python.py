@@ -42,7 +42,7 @@ def load_assets() -> Assets:
         #     raise ValueError
         if os.path.abspath(env_path):
             raise ValueError
-        return _load2(sanitized_path)
+        return _load2(Path(sanitized_path))
 
     else:
         return None
@@ -54,7 +54,7 @@ def load_assets() -> Assets:
     # return _load2()
 # = LOCAL_DIR / EXPERIMENT_NAME
 
-def _load2(path: str) -> Assets:
+def _load2(path: Path) -> Assets:
     # sanitize filepath
     # if not path.is_absolute():
     #     sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
