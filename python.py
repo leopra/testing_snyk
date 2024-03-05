@@ -35,15 +35,14 @@ def load_assets() -> Assets:
     env_path = os.environ.get("EXPERIMENT_FOLDER")
 
     if env_path is not None:
-        return _load(Path(env_path))
+        return _load2(Path(env_path))
 
     try:
-        return _load()
+        return _load2()
     except FileNotFoundError:
         pass
     # If the files don't exist locally, download and unpack them.
-    download_assets()
-    return _load()
+    return _load2()
 
 def _load(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
     metadata_path = path / "metadata.json"
@@ -88,3 +87,18 @@ def _load(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
     #     raise ValueException 
 
 
+def _load2(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
+    # sanitize filepath
+    if not path.is_absolute():
+        sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
+    else:
+        raise ValueError("Path should not be absolute.")
+
+    with open(f"{sanitized_path}/metadata.json", "r") as f:
+        json_metadata = json.load(f)
+
+    return Assets(
+        name=path.stem,
+        metadata=metadata,
+        metadata=json_metadata,
+    )
