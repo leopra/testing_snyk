@@ -27,30 +27,29 @@ def load_assets() -> Assets:
     env_path = os.environ.get("EXPERIMENT_FOLDER")
 
     if env_path is not None:
-        if os.path.abspath(env_path):
-            raise ValueError
-        sanitized_path = sanitize_filepath(env_path.replace("..", ""))
-        #base_path = "/AAAAA/"
-        sanitized_path = os.path.realpath(sanitized_path)
-
-        # common_base = os.path.commonpath([base_path, safe_path]) 
-        # if common_base != base_path:
-        #     raise ValueError
-        # if os.path.basename(safe_path) != env_path:
-        #     raise ValueError
-        
         return _load2(Path(sanitized_path))
 
     else:
         return None
 
 def _load2(path: Path) -> Assets:
+        if os.path.abspath(path):
+            raise ValueError
+        sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
+        #base_path = "/AAAAA/"
+        sanitized_path = os.path.realpath(sanitized_path)
+
+        common_base = os.path.commonpath([base_path, safe_path]) 
+        if common_base != base_path:
+            raise ValueError
+        if os.path.basename(safe_path) != env_path:
+            raise ValueError
+
         with open(f"{path.as_posix()}/metadata.json", "r") as f:
             json_metadata = json.load(f)
 
         return Assets(
             name=path.stem,
-            metadata=metadata,
             metadata=json_metadata,
         )
 
