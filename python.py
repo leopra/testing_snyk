@@ -54,9 +54,9 @@ def load_assets() -> Assets:
     #     pass
     # # If the files don't exist locally, download and unpack them.
     # return _load2()
+# = LOCAL_DIR / EXPERIMENT_NAME
 
-
-def _load2(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
+def _load2(path: Path) -> Assets:
     # sanitize filepath
     if not path.is_absolute():
         sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
