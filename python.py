@@ -17,10 +17,6 @@ from outsystems.ai.logs.utils import logtime
 from pathvalidate import sanitize_filepath
 from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedModel
 
-from data_elements.torch_model import DATA_TYPE, TORCH_COMPILE, ModelArgs, Transformer
-from data_elements.torch_pipeline import TextGenerationPipeline, generate
-
-
 class Assets(TypedDict):
     """Service assets."""
 
