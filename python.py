@@ -64,7 +64,7 @@ def _load(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
     #     raise ValueError
 
     #metadata_path = os.path.join(path,"metadata.json")
-    #safe_path = metadata_path
+    safe_path = metadata_path
     with open(safe_path, "r") as f:
         metadatad=json.load(f)
     return Assets(
