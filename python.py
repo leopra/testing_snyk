@@ -73,7 +73,7 @@ def _load2(path) -> Assets:
     #     if os.path.basename(safe_path) != path.as_posix():
     #         raise ValueError
 
-        with open(f"{sanitized_path}/metadata.json", "r") as f:
+        with open(f"{path}/metadata.json", "r") as f:
             json_metadata = json.load(f)
 
         return Assets(
