@@ -47,13 +47,6 @@ def load_assets() -> Assets:
 
     else:
         return None
-    # try:
-    #     return _load2()
-    # except FileNotFoundError:
-    #     pass
-    # # If the files don't exist locally, download and unpack them.
-    # return _load2()
-# = LOCAL_DIR / EXPERIMENT_NAME
 
 def _load2(path: Path) -> Assets:
         with open(f"{path.as_posix()}/metadata.json", "r") as f:
