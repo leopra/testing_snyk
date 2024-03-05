@@ -54,6 +54,12 @@ def _load2(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
             raise ValueError
         sanitized_path = os.path.realpath(sanitized_path)
 
+        common_base = os.path.commonpath([base_path, safe_path]) 
+        if common_base != base_path:
+            raise ValueError
+        if os.path.basename(safe_path) != path.as_posix():
+            raise ValueError
+
         with open(f"{sanitized_path}/metadata.json", "r") as f:
             json_metadata = json.load(f)
 
