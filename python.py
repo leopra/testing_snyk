@@ -11,11 +11,7 @@ from pathlib import Path
 from tarfile import TarFile, TarInfo
 from typing import Any, Iterator, TypedDict
 
-import s3fs
-import torch
-from outsystems.ai.logs.utils import logtime
 from pathvalidate import sanitize_filepath
-from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedModel
 
 class Assets(TypedDict):
     """Service assets."""
