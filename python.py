@@ -59,9 +59,9 @@ def _load(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
     # if common_base != base_path:
     #     raise ValueError
     
-    # if os.path.basename(safe_path) != metadata_path:
-    #     # Invalid - path traversal detected
-    #     raise ValueError
+    if os.path.basename(safe_path) != metadata_path:
+        # Invalid - path traversal detected
+        raise ValueError
 
     #metadata_path = os.path.join(path,"metadata.json")
     #safe_path = metadata_path
