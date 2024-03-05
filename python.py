@@ -92,7 +92,7 @@ def _load2(path: Path = LOCAL_DIR / EXPERIMENT_NAME) -> Assets:
     if not path.is_absolute():
         sanitized_path = sanitize_filepath(path.as_posix().replace("..", ""))
         with open(f"{sanitized_path}/metadata.json", "r") as f:
-        json_metadata = json.load(f)
+            json_metadata = json.load(f)
 
         return Assets(
             name=path.stem,
