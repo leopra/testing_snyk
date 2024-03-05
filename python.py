@@ -35,7 +35,16 @@ def load_assets() -> Assets:
     env_path = os.environ.get("EXPERIMENT_FOLDER")
 
     if env_path is not None:
-        return _load2(Path(env_path))
+        sanitized_path = sanitize_filepath(env_path.replace("..", ""))
+        base_path = "/AAAAA/"
+        sanitized_path = os.path.realpath(sanitized_path)
+
+        common_base = os.path.commonpath([base_path, safe_path]) 
+        if common_base != base_path:
+            raise ValueError
+        if os.path.basename(safe_path) != env_path:
+            raise ValueError
+        return _load2(Path(sanitized_path))
 
     try:
         return _load2()
