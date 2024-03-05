@@ -39,13 +39,13 @@ def _load2(path: Path) -> Assets:
         #base_path = "/AAAAA/"
         sanitized_path = os.path.realpath(sanitized_path)
 
-        common_base = os.path.commonpath([base_path, safe_path]) 
-        if common_base != base_path:
-            raise ValueError
-        if os.path.basename(safe_path) != env_path:
-            raise ValueError
+        # common_base = os.path.commonpath([base_path, safe_path]) 
+        # if common_base != base_path:
+        #     raise ValueError
+        # if os.path.basename(safe_path) != env_path:
+        #     raise ValueError
 
-        with open(f"{path.as_posix()}/metadata.json", "r") as f:
+        with open(f"{sanitized_path}/metadata.json", "r") as f:
             json_metadata = json.load(f)
 
         return Assets(
