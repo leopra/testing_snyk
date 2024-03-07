@@ -27,7 +27,7 @@ def load_assets() -> Assets:
     env_path = os.environ.get("EXPERIMENT_FOLDER")
 
     if env_path is not None:
-        return _load2(Path(sanitized_path))
+        return _load2(env_path)
 
     else:
         return None
